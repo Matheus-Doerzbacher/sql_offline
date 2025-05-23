@@ -3,7 +3,6 @@ import 'package:result_dart/result_dart.dart';
 import '../../../../domain/model/usuario.dart';
 import '../api_client.dart';
 import '../model/usuario/usuario_created.dart';
-import '../model/usuario/usuario_update.dart';
 
 const String _path = '/usuarios';
 
@@ -40,9 +39,9 @@ class UsuarioService {
     }
   }
 
-  AsyncResult<Usuario> updateUsuario(String id, UsuarioUpdate usuario) async {
+  AsyncResult<Usuario> updateUsuario(String id, Usuario usuario) async {
     try {
-      final result = await _apiClient.put('$_path/$id', usuario.toJson());
+      final result = await _apiClient.put('$_path/$id', usuario.toMap());
       return result.fold(
         (success) => Success(Usuario.fromMap(success)),
         Failure.new,

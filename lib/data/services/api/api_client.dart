@@ -67,7 +67,9 @@ class ApiClient {
   AsyncResult<dynamic> post(String path, dynamic body) async {
     final client = _clientFactory();
     try {
-      _log.info('POST $path');
+      _log
+        ..info('POST $path')
+        ..info('data: ${jsonEncode(body)}');
       final request = await client.postUrl(Uri.parse(_getUri(path)));
       await _authHeader(request.headers);
       request.write(jsonEncode(body));

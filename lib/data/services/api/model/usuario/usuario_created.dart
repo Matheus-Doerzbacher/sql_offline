@@ -1,6 +1,4 @@
-import '../../../../../domain/model/base_model.dart';
-
-class UsuarioCreated extends BaseModel {
+class UsuarioCreated {
   final String nome;
   final String email;
   final String senha;
@@ -9,25 +7,13 @@ class UsuarioCreated extends BaseModel {
     required this.nome,
     required this.email,
     required this.senha,
-    ApiStatus? apiStatus,
-    DateTime? dataCriacao,
-    DateTime? dataAlteracao,
-  }) : super(
-          apiStatus: apiStatus ?? ApiStatus.pendente,
-          dataCriacao: dataCriacao ?? DateTime.now(),
-          dataAlteracao: dataAlteracao ?? DateTime.now(),
-        );
+  });
 
   factory UsuarioCreated.fromJson(Map<String, dynamic> json) {
-    final base = BaseModel.fromMap(json);
-
     return UsuarioCreated(
       nome: json['nome'],
       email: json['email'],
       senha: json['senha'],
-      apiStatus: base.apiStatus,
-      dataCriacao: base.dataCriacao,
-      dataAlteracao: base.dataAlteracao,
     );
   }
 
@@ -36,7 +22,17 @@ class UsuarioCreated extends BaseModel {
       'nome': nome,
       'email': email,
       'senha': senha,
-      ...baseMap,
     };
+  }
+
+  UsuarioCreated copyWith({
+    String? nome,
+    String? senha,
+  }) {
+    return UsuarioCreated(
+      nome: nome ?? this.nome,
+      email: email,
+      senha: senha ?? this.senha,
+    );
   }
 }

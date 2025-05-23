@@ -1,24 +1,20 @@
 import 'base_model.dart';
 
 class Usuario extends BaseModel {
-  final int? id;
+  final int id;
   final String nome;
   final String email;
   final String? senha;
 
   Usuario({
-    this.id,
+    required this.id,
     required this.nome,
     required this.email,
     this.senha,
-    ApiStatus? apiStatus,
-    DateTime? dataCriacao,
-    DateTime? dataAlteracao,
-  }) : super(
-          apiStatus: apiStatus ?? ApiStatus.pendente,
-          dataCriacao: dataCriacao ?? DateTime.now(),
-          dataAlteracao: dataAlteracao ?? DateTime.now(),
-        );
+    required super.apiStatus,
+    required super.dataCriacao,
+    required super.dataAlteracao,
+  });
 
   Map<String, dynamic> toMap() {
     return {
@@ -45,15 +41,16 @@ class Usuario extends BaseModel {
 
   Usuario copyWith({
     String? nome,
-    String? email,
-    ApiStatus? apiStatus,
-    DateTime? dataAlteracao,
+    String? senha,
   }) {
     return Usuario(
+      id: id,
       nome: nome ?? this.nome,
-      email: email ?? this.email,
-      apiStatus: apiStatus ?? this.apiStatus,
-      dataAlteracao: dataAlteracao ?? this.dataAlteracao,
+      email: email,
+      senha: senha ?? this.senha,
+      apiStatus: apiStatus,
+      dataCriacao: dataCriacao,
+      dataAlteracao: dataAlteracao,
     );
   }
 }
