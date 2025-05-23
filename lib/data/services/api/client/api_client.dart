@@ -94,7 +94,7 @@ class ApiClient {
     }
   }
 
-  AsyncResult<dynamic> put(String path, dynamic body, {int? id}) async {
+  AsyncResult<dynamic> put(String path, dynamic body, int id) async {
     final client = _clientFactory();
     try {
       _log.info('PUT $path/$id');
@@ -122,7 +122,7 @@ class ApiClient {
     }
   }
 
-  AsyncResult<Unit> delete(String path, {int? id}) async {
+  AsyncResult<Unit> delete(String path, int id) async {
     final client = _clientFactory();
     try {
       _log.info('DELETE $path/$id');

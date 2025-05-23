@@ -1,13 +1,13 @@
 import 'base_model.dart';
 
 class Usuario extends BaseModel {
-  final int id;
+  final int idUsuario;
   final String nome;
   final String email;
   final String? senha;
 
   Usuario({
-    required this.id,
+    required this.idUsuario,
     required this.nome,
     required this.email,
     this.senha,
@@ -18,7 +18,7 @@ class Usuario extends BaseModel {
 
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
+      'id_usuario': idUsuario,
       'nome': nome,
       'email': email,
       'senha': senha,
@@ -30,7 +30,7 @@ class Usuario extends BaseModel {
     final base = BaseModel.fromMap(json);
 
     return Usuario(
-      id: json['id_usuario'],
+      idUsuario: json['id_usuario'],
       nome: json['nome'],
       email: json['email'],
       apiStatus: base.apiStatus,
@@ -44,7 +44,7 @@ class Usuario extends BaseModel {
     String? senha,
   }) {
     return Usuario(
-      id: id,
+      idUsuario: idUsuario,
       nome: nome ?? this.nome,
       email: email,
       senha: senha ?? this.senha,

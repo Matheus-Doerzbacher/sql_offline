@@ -235,6 +235,7 @@ class _LoginPageState extends State<LoginPage> {
           : () {
               setState(() {
                 _isCreated = !_isCreated;
+                _formKey.currentState!.reset();
               });
             },
       child: Text(

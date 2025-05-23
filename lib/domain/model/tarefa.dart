@@ -1,14 +1,14 @@
 import 'package:sql_offline/domain/model/base_model.dart';
 
 class Tarefa extends BaseModel {
-  final int id;
+  final int idTarefa;
   final int idUsuario;
   final String titulo;
   final String descricao;
   final bool isConcluida;
 
   Tarefa({
-    required this.id,
+    required this.idTarefa,
     required this.idUsuario,
     required this.titulo,
     required this.descricao,
@@ -22,7 +22,7 @@ class Tarefa extends BaseModel {
     final base = BaseModel.fromMap(json);
 
     return Tarefa(
-      id: json['id'],
+      idTarefa: json['id_tarefa'],
       idUsuario: json['id_usuario'],
       titulo: json['titulo'],
       descricao: json['descricao'],
@@ -35,7 +35,7 @@ class Tarefa extends BaseModel {
 
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
+      'id_tarefa': idTarefa,
       'id_usuario': idUsuario,
       'titulo': titulo,
       'descricao': descricao,
@@ -51,7 +51,7 @@ class Tarefa extends BaseModel {
     ApiStatus? apiStatus,
   }) {
     return Tarefa(
-      id: id,
+      idTarefa: idTarefa,
       idUsuario: idUsuario,
       titulo: titulo ?? this.titulo,
       descricao: descricao ?? this.descricao,

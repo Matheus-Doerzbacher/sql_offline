@@ -1,8 +1,8 @@
 import 'package:logging/logging.dart';
 import 'package:result_dart/result_dart.dart';
-import '../../../../domain/model/usuario.dart';
-import '../api_client.dart';
-import '../model/usuario/usuario_created.dart';
+import '../../../domain/model/usuario.dart';
+import 'client/api_client.dart';
+import 'model/usuario/usuario_created.dart';
 
 const String _path = '/usuarios';
 
@@ -52,9 +52,10 @@ class UsuarioService {
     }
   }
 
-  AsyncResult<Usuario> updateUsuario(String id, Usuario usuario) async {
+  AsyncResult<Usuario> updateUsuario(Usuario usuario) async {
     try {
-      final result = await _apiClient.put('$_path/$id', usuario.toMap());
+      final result =
+          await _apiClient.put(_path, usuario.toMap(), usuario.idUsuario);
       return result.fold(
         (success) => Success(Usuario.fromMap(success)),
         Failure.new,
@@ -65,7 +66,7 @@ class UsuarioService {
     }
   }
 
-  AsyncResult<Unit> deleteUsuario(String id) async {
-    return _apiClient.delete('$_path/$id');
+  AsyncResult<Unit> deleteUsuario(int id) async {
+    return _apiClient.delete(_path, id);
   }
 }

@@ -1,11 +1,14 @@
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
+import 'package:sql_offline/data/repository/tarefa_repository.dart';
+import 'package:sql_offline/data/services/api/tarefa_service.dart';
 import 'package:sql_offline/ui/usuario/usuario_viewmodel.dart';
+
 import '../data/repository/auth_repository.dart';
 import '../data/repository/usuario_repository.dart';
-import '../data/services/api/api_client.dart';
 import '../data/services/api/auth_api_client.dart';
-import '../data/services/api/usuario/usuario_service.dart';
+import '../data/services/api/client/api_client.dart';
+import '../data/services/api/usuario_service.dart';
 import '../data/services/shared_preferences_service.dart';
 import '../ui/auth/login/login_viewmodel.dart';
 import '../ui/auth/logout/logout_viewmodel.dart';
@@ -23,6 +26,11 @@ List<SingleChildWidget> providers = [
       apiClient: context.read(),
     ),
   ),
+  Provider(
+    create: (context) => TarefaService(
+      apiClient: context.read(),
+    ),
+  ),
 
   // Repositories
   ChangeNotifierProvider(
@@ -35,6 +43,11 @@ List<SingleChildWidget> providers = [
   Provider(
     create: (context) => UsuarioRepository(
       usuarioService: context.read(),
+    ),
+  ),
+  Provider(
+    create: (context) => TarefaRepository(
+      tarefaService: context.read(),
     ),
   ),
 
@@ -50,7 +63,11 @@ List<SingleChildWidget> providers = [
       authRepository: context.read(),
     ),
   ),
-  ChangeNotifierProvider(create: (context) => HomeViewModel()),
+  ChangeNotifierProvider(
+    create: (context) => HomeViewModel(
+      tarefaRepository: context.read(),
+    ),
+  ),
   ChangeNotifierProvider(
     create: (context) => UsuarioViewModel(
       usuarioRepository: context.read(),
