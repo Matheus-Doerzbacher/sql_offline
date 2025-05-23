@@ -13,6 +13,19 @@ class UsuarioService {
 
   final _log = Logger('UsuarioService');
 
+  AsyncResult<Usuario> getUsuarioLogado() async {
+    try {
+      final result = await _apiClient.get('$_path/logado');
+      return result.fold(
+        (value) => Success(Usuario.fromMap(value)),
+        Failure.new,
+      );
+    } on Exception catch (e) {
+      _log.severe('Falha ao buscar usuário por token: $e');
+      return Failure(e);
+    }
+  }
+
   AsyncResult<Usuario> getUsuario(String id) async {
     try {
       final result = await _apiClient.get('$_path/$id');

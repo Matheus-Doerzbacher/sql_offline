@@ -1,5 +1,6 @@
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
+import 'package:sql_offline/ui/usuario/usuario_viewmodel.dart';
 import '../data/repository/auth_repository.dart';
 import '../data/repository/usuario_repository.dart';
 import '../data/services/api/api_client.dart';
@@ -50,4 +51,9 @@ List<SingleChildWidget> providers = [
     ),
   ),
   ChangeNotifierProvider(create: (context) => HomeViewModel()),
+  ChangeNotifierProvider(
+    create: (context) => UsuarioViewModel(
+      usuarioRepository: context.read(),
+    ),
+  ),
 ];

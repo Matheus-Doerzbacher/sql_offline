@@ -13,4 +13,8 @@ class UsuarioRepository {
   AsyncResult<Usuario> createUser(UsuarioCreated usuarioCreated) async {
     return _usuarioService.createUsuario(usuarioCreated);
   }
+
+  AsyncResult<Usuario> getUsuarioLogado() async {
+    return _usuarioService.getUsuarioLogado();
+  }
 }

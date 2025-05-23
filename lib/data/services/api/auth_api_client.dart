@@ -26,7 +26,7 @@ class AuthApiClient {
       request.headers.contentType =
           ContentType('application', 'x-www-form-urlencoded', charset: 'utf-8');
       final body = 'grant_type=password'
-          '&username=${Uri.encodeComponent(loginRequest.email)}'
+          '&username=${Uri.encodeComponent(loginRequest.email.toLowerCase())}'
           '&password=${Uri.encodeComponent(loginRequest.password)}';
       request.write(body);
       final response = await request.close();

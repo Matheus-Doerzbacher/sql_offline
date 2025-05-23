@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:sql_offline/routing/routes.dart';
 import '../auth/logout/logout_button.dart';
 import 'home_viewmodel.dart';
 
@@ -17,13 +19,21 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Home'),
+        leading: LogoutButton(viewModel: context.read()),
+        actions: [
+          IconButton(
+            onPressed: () {
+              context.go(Routes.usuarioRoute);
+            },
+            icon: const Icon(Icons.person),
+          ),
+        ],
       ),
-      body: Center(
+      body: const Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text('Home'),
-            LogoutButton(viewModel: context.read()),
+            Text('Home'),
           ],
         ),
       ),

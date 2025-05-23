@@ -16,11 +16,11 @@ class _LogoutButtonState extends State<LogoutButton> {
       listenable: widget.viewModel.logout,
       builder: (context, _) {
         final isRunning = widget.viewModel.logout.isRunning;
-        return ElevatedButton(
+        return IconButton(
           onPressed: isRunning ? null : () => widget.viewModel.logout.execute(),
-          child: isRunning
-              ? const CircularProgressIndicator()
-              : const Text('Logout'),
+          icon: isRunning
+              ? const CircularProgressIndicator.adaptive()
+              : const Icon(Icons.logout),
         );
       },
     );
