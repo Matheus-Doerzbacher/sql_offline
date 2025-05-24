@@ -66,11 +66,13 @@ List<SingleChildWidget> providers = [
   ChangeNotifierProvider(
     create: (context) => HomeViewModel(
       tarefaRepository: context.read(),
+      authRepository: context.read(),
     ),
   ),
   ChangeNotifierProvider(
     create: (context) => UsuarioViewModel(
       usuarioRepository: context.read(),
+      authRepository: context.read(),
     ),
   ),
 ];

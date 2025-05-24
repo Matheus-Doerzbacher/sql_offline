@@ -18,7 +18,7 @@ class _UsuarioPageState extends State<UsuarioPage> {
       ),
       body: ListenableBuilder(
         listenable: widget.viewModel.buscarUsuario,
-        builder: (context, child) {
+        builder: (context, _) {
           if (widget.viewModel.buscarUsuario.isRunning) {
             return const Center(
               child: CircularProgressIndicator(),
@@ -26,7 +26,7 @@ class _UsuarioPageState extends State<UsuarioPage> {
           }
 
           return Center(
-            child: Text(widget.viewModel.usuario.nome),
+            child: Text(widget.viewModel.usuario!.nome),
           );
         },
       ),

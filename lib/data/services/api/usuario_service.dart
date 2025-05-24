@@ -4,7 +4,7 @@ import '../../../domain/model/usuario.dart';
 import 'client/api_client.dart';
 import 'model/usuario/usuario_created.dart';
 
-const String _path = '/usuarios';
+const String _path = '/usuarios/';
 
 class UsuarioService {
   UsuarioService({required ApiClient apiClient}) : _apiClient = apiClient;
@@ -15,7 +15,7 @@ class UsuarioService {
 
   AsyncResult<Usuario> getUsuarioLogado() async {
     try {
-      final result = await _apiClient.get('$_path/logado');
+      final result = await _apiClient.get('${_path}logado');
       return result.fold(
         (value) => Success(Usuario.fromMap(value)),
         Failure.new,
@@ -28,7 +28,7 @@ class UsuarioService {
 
   AsyncResult<Usuario> getUsuario(int id) async {
     try {
-      final result = await _apiClient.get('$_path/$id');
+      final result = await _apiClient.get('$_path$id');
       return result.fold(
         (value) => Success(Usuario.fromMap(value)),
         Failure.new,

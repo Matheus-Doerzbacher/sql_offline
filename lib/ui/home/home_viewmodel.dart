@@ -1,16 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:result_command/result_command.dart';
 import 'package:result_dart/result_dart.dart';
+import 'package:sql_offline/data/repository/auth_repository.dart';
 import 'package:sql_offline/data/repository/tarefa_repository.dart';
 import 'package:sql_offline/data/services/api/model/tarefa/tarefa_created.dart';
 import 'package:sql_offline/domain/model/tarefa.dart';
 
 class HomeViewModel extends ChangeNotifier {
   final TarefaRepository _tarefaRepository;
+  final AuthRepository _authRepository;
 
-  HomeViewModel({required TarefaRepository tarefaRepository})
-      : _tarefaRepository = tarefaRepository {
+  HomeViewModel({
+    required TarefaRepository tarefaRepository,
+    required AuthRepository authRepository,
+  })  : _tarefaRepository = tarefaRepository,
+        _authRepository = authRepository {
+    _authRepository.addListener(_onAuthChanged);
     buscarTarefas.execute();
+  }
+
+  @override
+  void dispose() {
+    _authRepository.removeListener(_onAuthChanged);
+    super.dispose();
+  }
+
+  Future<void> _onAuthChanged() async {
+    final isAuthenticated = await _authRepository.isAuthenticated;
+    if (isAuthenticated) {
+      await buscarTarefas.execute();
+    } else {
+      _tarefas.clear();
+      notifyListeners();
+    }
   }
 
   final _tarefas = <Tarefa>[];

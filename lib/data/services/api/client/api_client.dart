@@ -27,16 +27,10 @@ class ApiClient {
   String get _hostBase => 'http://localhost:8000/api/v1';
 
   String _getUri(String path, {int? id}) {
-    if (path.startsWith('/')) {
-      if (id != null) {
-        return '$_hostBase$path/$id';
-      }
-      return '$_hostBase$path/';
-    }
     if (id != null) {
-      return '$_hostBase/$path/$id';
+      return '$_hostBase$path$id';
     }
-    return '$_hostBase/$path/';
+    return '$_hostBase$path';
   }
 
   AsyncResult<dynamic> get(String path) async {

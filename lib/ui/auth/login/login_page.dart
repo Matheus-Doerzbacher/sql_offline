@@ -92,6 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                       const SizedBox(height: 16),
+                      const FlutterLogo(size: 100),
                       if (_isCreated) _buildFormNome(),
                       _buildFormEmail(),
                       _buildFormPassword(),

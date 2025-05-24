@@ -8,7 +8,7 @@ class TarefaService {
 
   TarefaService({required ApiClient apiClient}) : _apiClient = apiClient;
 
-  String get _path => '/tarefas';
+  String get _path => '/tarefas/';
 
   AsyncResult<List<Tarefa>> getTarefas() async {
     final result = await _apiClient.get(_path);

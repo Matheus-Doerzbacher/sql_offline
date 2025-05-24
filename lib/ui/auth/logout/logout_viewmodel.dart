@@ -6,8 +6,9 @@ import '../../../data/repository/auth_repository.dart';
 class LogoutViewModel extends ChangeNotifier {
   final AuthRepository _authRepository;
 
-  LogoutViewModel({required AuthRepository authRepository})
-      : _authRepository = authRepository;
+  LogoutViewModel({
+    required AuthRepository authRepository,
+  }) : _authRepository = authRepository;
 
   late final logout = Command0(_logout);
 

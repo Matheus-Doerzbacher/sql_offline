@@ -22,6 +22,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     widget.viewModel.buscarTarefas.addListener(_listener);
     widget.viewModel.atualizarTarefa.addListener(_listener);
+    widget.viewModel.buscarTarefas.execute();
   }
 
   @override
@@ -56,15 +57,24 @@ class _HomePageState extends State<HomePage> {
           widget.viewModel.buscarTarefas,
         ]),
         builder: (context, _) {
+          if (widget.viewModel.buscarTarefas.isRunning) {
+            return const Center(child: CircularProgressIndicator());
+          }
+
+          final tarefas = widget.viewModel.tarefas;
+          if (tarefas.isEmpty) {
+            return const Center(child: Text('Nenhuma tarefa encontrada'));
+          }
+
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(
               children: [
                 Expanded(
                   child: ListView.builder(
-                    itemCount: widget.viewModel.tarefas.length,
+                    itemCount: tarefas.length,
                     itemBuilder: (context, index) {
-                      final tarefa = widget.viewModel.tarefas[index];
+                      final tarefa = tarefas[index];
                       return Dismissible(
                         key: Key(tarefa.idTarefa.toString()),
                         direction: DismissDirection.startToEnd,
