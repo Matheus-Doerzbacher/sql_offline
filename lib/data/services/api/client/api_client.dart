@@ -21,6 +21,7 @@ class ApiClient {
     if (header != null) {
       headers.add(HttpHeaders.authorizationHeader, header);
     }
+    headers.contentType = ContentType.json;
   }
 
   String get _hostBase => 'http://localhost:8000/api/v1';
@@ -68,7 +69,7 @@ class ApiClient {
     final client = _clientFactory();
     try {
       _log
-        ..info('POST $path')
+        ..info('POST ${_getUri(path)}')
         ..info('data: ${jsonEncode(body)}');
       final request = await client.postUrl(Uri.parse(_getUri(path)));
       await _authHeader(request.headers);
@@ -79,10 +80,12 @@ class ApiClient {
         final json = jsonDecode(stringData);
         return Success(json);
       } else {
-        _log.severe('POST $path falhou com status ${response.statusCode}');
+        _log.warning(
+          'POST ${_getUri(path)} falhou com status ${response.statusCode}',
+        );
         return Failure(
-          HttpException(
-            'POST $path falhou com status ${response.statusCode}',
+          Exception(
+            'POST ${_getUri(path)} falhou com status ${response.statusCode}',
           ),
         );
       }
