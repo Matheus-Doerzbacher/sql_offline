@@ -3,8 +3,8 @@ import 'dart:io';
 
 import 'package:logging/logging.dart';
 import 'package:result_dart/result_dart.dart';
-import '../../services/api/model/login/login_request.dart';
-import '../../services/api/model/login/login_responde.dart';
+import '../model/login/login_request.dart';
+import '../model/login/login_responde.dart';
 
 class AuthApiClient {
   AuthApiClient({HttpClient Function()? clientFactory})

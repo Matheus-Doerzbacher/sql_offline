@@ -6,8 +6,8 @@ import 'package:sql_offline/ui/usuario/usuario_viewmodel.dart';
 
 import '../data/repository/auth_repository.dart';
 import '../data/repository/usuario_repository.dart';
-import '../data/services/api/auth_api_client.dart';
 import '../data/services/api/client/api_client.dart';
+import '../data/services/api/client/auth_api_client.dart';
 import '../data/services/api/usuario_service.dart';
 import '../data/services/shared_preferences_service.dart';
 import '../ui/auth/login/login_viewmodel.dart';

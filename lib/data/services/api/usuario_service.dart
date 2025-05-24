@@ -26,7 +26,7 @@ class UsuarioService {
     }
   }
 
-  AsyncResult<Usuario> getUsuario(String id) async {
+  AsyncResult<Usuario> getUsuario(int id) async {
     try {
       final result = await _apiClient.get('$_path/$id');
       return result.fold(

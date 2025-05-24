@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:result_dart/result_dart.dart';
 
-import '../services/api/auth_api_client.dart';
 import '../services/api/client/api_client.dart';
+import '../services/api/client/auth_api_client.dart';
 import '../services/api/model/login/login_request.dart';
 import '../services/shared_preferences_service.dart';
 
